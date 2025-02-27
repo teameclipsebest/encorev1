@@ -287,6 +287,10 @@ module.exports = class Database {
     async createSetup({
         id, message, channel
     }) {
+        if (!id) {
+            throw new Error("Guild ID is required for setup creation");
+        }
+        
         return await this.guilds.updateOne(
             { id },
             {
