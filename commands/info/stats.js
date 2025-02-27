@@ -24,7 +24,7 @@ module.exports = class Stats extends BaseCommand {
         }).addFields([
             {
                 name: `${this.client.user.username}'s Information`,
-                value: `Bot's Mention: ${this.client.user}\nBot's Version: ${require("../../package.json").version}\nTotal Servers: ${await this.client.shard.broadcastEval(x => x.guilds.cache.size).then(r => r.reduce((a, b) => a + b, 0))}\nTotal Users: ${await this.client.shard.broadcastEval(x => x.guilds.cache.filter(x => x.available).reduce((a, b) => a + b.memberCount, 0)).then((r) => r.reduce((acc, memberCount) => acc + memberCount, 0))}\nTotal Channels: ${this.client.channels.cache.size}\nLast Rebooted: <t:${Math.round(this.client.readyTimestamp / 1000)}:R>`
+                value: `Bot's Mention: ${this.client.user}\nBot's Version: ${require("../../package.json").version}\nTotal Servers: ${this.client.shard ? await this.client.shard.broadcastEval(x => x.guilds.cache.size).then(r => r.reduce((a, b) => a + b, 0)) : this.client.guilds.cache.size}\nTotal Users: ${this.client.shard ? await this.client.shard.broadcastEval(x => x.guilds.cache.filter(x => x.available).reduce((a, b) => a + b.memberCount, 0)).then((r) => r.reduce((acc, memberCount) => acc + memberCount, 0)) : this.client.guilds.cache.reduce((acc, guild) => acc + guild.memberCount, 0)}\nTotal Channels: ${this.client.channels.cache.size}\nLast Rebooted: <t:${Math.round(this.client.readyTimestamp / 1000)}:R>`
             }
         ]).setFooter({
             text: `Requested By: ${message.author.globalName ?? message.author.username}`,
