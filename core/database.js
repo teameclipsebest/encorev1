@@ -33,6 +33,11 @@ module.exports = class Database {
                 required: true,
                 unique: true
             },
+            guildId: {
+                type: String,
+                unique: true,
+                sparse: true
+            },
             prefix: {
                 type: String,
                 default: this.client.config.prefix

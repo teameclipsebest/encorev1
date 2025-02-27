@@ -113,6 +113,9 @@ module.exports = class Setup extends BaseCommand {
             }
 
             try{
+                if (!message.guild || !message.guild.id) {
+                    throw new Error("Guild information is missing");
+                }
                 await createSetup(this.client, message.guild, channel);
             } catch(e) {
                 console.log("Setup error:", e);
