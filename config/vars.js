@@ -1,7 +1,7 @@
 const vars = {
     token: "MTM0NDcwMTY2NzU3MTkyNTAwMw.GoDAiJ.3d-dmNbV_954Ap1G0rZHb9JsKSz_sMMlIPPXy8",
     prefix: "!",
-    mongoURL: "mongodb+srv://me70j:ebgul@cluster0.ehg1v.mongodb.net/?retryWrites=true&w=majority",
+    mongoURL: process.env.MONGODB_URI || "mongodb://localhost:27017/eclipsebot",
     owners: ["1344693434723864587"],
     color: "#ff0000" ,// embed color
     webhooks: {
