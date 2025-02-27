@@ -5,23 +5,23 @@ module.exports = class Database {
     async updateBlacklist(data) {
         return await this.blacklist.findOneAndUpdate({}, data, { upsert: true });
     }
-    
+
     async updatePresence(data) {
         return await this.presence.findOneAndUpdate({}, data, { upsert: true });
     }
-    
+
     async getPresence() {
         return await this.presence.findOne({});
     }
-    
+
     async updateMaintenance(data) {
         return await this.maintenance.findOneAndUpdate({}, data, { upsert: true });
     }
-    
+
     async getMaintenance() {
         return await this.maintenance.findOne({});
     }
-    
+
     async deleteGuildData(guildId) {
         return await this.guilds.findOneAndDelete({ id: guildId });
     }
@@ -30,7 +30,8 @@ module.exports = class Database {
         this.guilds = mongoose.model("Guild", new mongoose.Schema({
             id: {
                 type: String,
-                required: true
+                required: true,
+                unique: true
             },
             prefix: {
                 type: String,

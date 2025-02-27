@@ -53,6 +53,10 @@ module.exports = {
 
         let msg = await channel.send({ content, embeds: [embed], components: [row1, row2] });
 
+        if (!guild || !guild.id) {
+            throw new Error("Guild ID is required for setup creation");
+        }
+
         await client.db.createSetup({
             id: guild.id,
             message: msg,
