@@ -12,7 +12,32 @@ module.exports = class Ready extends BaseEvent {
         let cmds = [];
         this.client.commands.forEach((cmd) => {
             if(cmd.name && cmd.description) {
-                cmds.push(cmd);
+                // Create a deep copy of the command to avoid modifying the original
+                const cmdCopy = JSON.parse(JSON.stringify(cmd));
+
+                // Add 'type' field to options if they exist
+                if (cmdCopy.options) {
+                    cmdCopy.options = cmdCopy.options.map(option => {
+                        if (!option.type) {
+                            // Default to STRING (3) if type is missing
+                            option.type = 3;
+                        }
+
+                        // Check for nested options (subcommand groups)
+                        if (option.options) {
+                            option.options = option.options.map(subOption => {
+                                if (!subOption.type) {
+                                    subOption.type = 3;
+                                }
+                                return subOption;
+                            });
+                        }
+
+                        return option;
+                    });
+                }
+
+                cmds.push(cmdCopy);
             }
         });
         this.client.application?.fetch().then(async (application) => {
