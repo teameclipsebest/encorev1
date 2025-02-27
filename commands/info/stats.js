@@ -103,6 +103,37 @@ module.exports = class Stats extends BaseCommand {
                             ])
                         ]
                     })
+                } else if(interaction.customId === "team-info") {
+                    let teamEmbed = new EmbedBuilder()
+                        .setColor(this.client.config.color)
+                        .setAuthor({
+                            name: this.client.user.username,
+                            iconURL: this.client.user.displayAvatarURL()
+                        })
+                        .setTitle("Eclipse Team")
+                        .addFields([
+                            {
+                                name: 'Developers',
+                                value: 'The main developers behind Eclipse bot.'
+                            },
+                            {
+                                name: 'Contributors',
+                                value: 'Everyone who helped improve Eclipse.'
+                            }
+                        ])
+                        .setFooter({
+                            text: `Requested By: ${message.author.globalName ?? message.author.username}`,
+                            iconURL: message.author.displayAvatarURL({ forceStatic: false })
+                        });
+
+                    return await interaction.update({
+                        embeds: [teamEmbed],
+                        components: [
+                            new ActionRowBuilder().addComponents([
+                                btn1, btn2.setDisabled(true), btn3
+                            ])
+                        ]
+                    });
                 }
             }
         });
