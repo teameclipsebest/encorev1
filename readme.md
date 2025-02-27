@@ -1,12 +1,9 @@
-# Fucked Lyra Music Bot 🎶
-Leaked by **Manas4sure**  
-Contributor: **rana.ly** - discord.gg/akhiyan
-
+# Eclipse Music Bot 🎶
 
 ---
 
 ## 🚀 Overview
-The **Fucked Lyra Music Bot** is a powerful, feature-rich Discord music bot designed for seamless audio playback in voice channels. Built with modern technologies, it offers advanced music streaming capabilities, interactive commands, and a polished user experience.
+The **Eclipse Music Bot** is a powerful, feature-rich Discord music bot designed for seamless audio playback in voice channels. Built with modern technologies, it offers advanced music streaming capabilities, interactive commands, and a polished user experience.
 
 ---
 
@@ -19,4 +16,6 @@ The **Fucked Lyra Music Bot** is a powerful, feature-rich Discord music bot desi
 
 ---
 
-
+## 🖤 You can test the sample here
+- **[Team Eclipse](https://discord.gg/f8TZDbRbZt)**
+- **[Invite](https://discord.com/oauth2/authorize?client_id=1344701667571925003)**
