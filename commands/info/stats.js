@@ -91,7 +91,9 @@ module.exports = class Stats extends BaseCommand {
                     return await interaction.update({
                         embeds: [embed3],
                         components: [
-                            new ActionRowBuilder().addComponents([btn1,btn2,btn3.setDisabled(true)])
+                            new ActionRowBuilder().addComponents([
+                                btn1, btn2, btn3.setDisabled(true)
+                            ])
                         ]
                     });
                 } else if(interaction.customId === "general-info") {
