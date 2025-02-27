@@ -1,6 +1,30 @@
 const mongoose = require("mongoose");
 
 module.exports = class Database {
+    // Methods for owner commands
+    async updateBlacklist(data) {
+        return await this.blacklist.findOneAndUpdate({}, data, { upsert: true });
+    }
+    
+    async updatePresence(data) {
+        return await this.presence.findOneAndUpdate({}, data, { upsert: true });
+    }
+    
+    async getPresence() {
+        return await this.presence.findOne({});
+    }
+    
+    async updateMaintenance(data) {
+        return await this.maintenance.findOneAndUpdate({}, data, { upsert: true });
+    }
+    
+    async getMaintenance() {
+        return await this.maintenance.findOne({});
+    }
+    
+    async deleteGuildData(guildId) {
+        return await this.guilds.findOneAndDelete({ id: guildId });
+    }
     constructor(client) {
         this.client = client;
         this.guilds = mongoose.model("Guild", new mongoose.Schema({
