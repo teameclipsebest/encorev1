@@ -115,10 +115,13 @@ module.exports = class Setup extends BaseCommand {
             try{
                 await createSetup(this.client, message.guild, channel);
             } catch(e) {
-                console.log(e);
+                console.log("Setup error:", e);
                 return await message.channel.send({
                     embeds: [
-                        new EmbedBuilder().setColor(this.client.config.color).setDescription(`${this.client.emoji.cross} Failed to create Setup. Kindly Contact the Support.`)
+                        new EmbedBuilder()
+                            .setColor(this.client.config.color)
+                            .setDescription(`${this.client.emoji.cross} Failed to create Setup. Error: ${e.message || "Unknown error"}`)
+                            .setFooter({ text: 'If this persists, please contact support' })
                     ]
                 });
             }

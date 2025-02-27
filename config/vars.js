@@ -1,5 +1,5 @@
 const vars = {
-    token: "MTM0NDcwMTY2NzU3MTkyNTAwMw.GoDAiJ.3d-dmNbV_954Ap1G0rZHb9JsKSz_sMMlIPPXy8",
+    token: process.env.BOT_TOKEN || "MTM0NDcwMTY2NzU3MTkyNTAwMw.GoDAiJ.3d-dmNbV_954Ap1G0rZHb9JsKSz_sMMlIPPXy8", // Preferably use environment variable
     prefix: "!",
     mongoURL: process.env.MONGODB_URI || "mongodb+srv://admin:admin@cluster0.l1ualfd.mongodb.net/?retryWrites=true&w=majority",
     owners: ["1344693434723864587"],

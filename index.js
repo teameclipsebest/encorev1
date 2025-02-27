@@ -33,10 +33,17 @@ const EclipseBot = new Eclipse({
 
 EclipseBot.start();
 
-process.on("unhandledRejection", (e) => {
-    console.log(e);
+process.on("unhandledRejection", (reason, promise) => {
+    console.error("Unhandled Rejection at:", promise, "reason:", reason);
+    // Prevent the application from crashing, but log the issue
 });
 
-process.on("uncaughtException", (e) => {
-    console.log(e);
+process.on("uncaughtException", (error) => {
+    console.error("Uncaught Exception:", error);
+    // Log the error but keep the application running if possible
+});
+
+// Add this to catch warnings
+process.on("warning", (warning) => {
+    console.warn("Warning:", warning.name, warning.message);
 });

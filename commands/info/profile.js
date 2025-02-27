@@ -60,25 +60,25 @@ module.exports = class Profile extends BaseCommand {
         let badge = "";
         let roles = member?.roles.cache;
         let badges = require("./badges.json");
-        if(roles.has(badges.owner)) {
+        if(roles && roles.has(badges.owner)) {
             badge += `\n${badges.emotes.owner} Owner`;
         }
-        if(roles.has(badges.developer)) {
+        if(roles && roles.has(badges.developer)) {
             badge += `\n${badges.emotes.developer} Developer`;
         }
-        if(roles.has(badges.special)) {
+        if(roles && roles.has(badges.special)) {
             badge += `\n${badges.emotes.special} Special`;
         }
-        if(roles.has(badges.vip)) {
+        if(roles && roles.has(badges.vip)) {
             badge += `\n${badges.emotes.vip} Vip`;
         }
-        if(roles.has(badges.friend)) {
+        if(roles && roles.has(badges.friend)) {
             badge += `\n${badges.emotes.friend} Friend`;
         }
-        if(roles.has(badges.owner)) {
+        if(roles && roles.has(badges.staff)) {
             badge += `\n${badges.emotes.staff} Staff`;
         }
-        if(roles.has(badges.moderator)) {
+        if(roles && roles.has(badges.moderator)) {
             badge += `\n${badges.emotes.moderator} Moderator`;
         }
         badge += `\n${badges.emotes.user} User`;

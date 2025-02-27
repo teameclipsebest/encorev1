@@ -37,7 +37,20 @@ class Eclipse extends Client {
     }
     start() {
         this.handler.handle();
-        this.login(this.config.token);
+        this.login(this.config.token).catch(error => {
+            this.logger.error(`Failed to login: ${error.message}`);
+            console.error('Login error:', error);
+        });
+        
+        // Add global error handlers
+        this.on('error', error => {
+            this.logger.error(`Client error: ${error.message}`);
+            console.error('Discord client error:', error);
+        });
+        
+        this.on('shardError', (error, shardId) => {
+            this.logger.error(`Shard ${shardId} error: ${error.message}`);
+        });
     }
 }
 
