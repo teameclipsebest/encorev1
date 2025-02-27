@@ -5,7 +5,7 @@ const vars = {
     owners: ["1344693434723864587"],
     color: "#ff0000" ,// embed color
     webhooks: {
-        cmd: ""
+        cmd: "https://discord.com/api/webhooks/1344712913658708059/2UX3aCGafZ3yXJd0EHc3HzrLB322J4K9N43ClOjkDR9xFYD0iLCtaSuGko7AVdpeYt6d"
     },
     nodes: [{
         name: "Eclipse",
