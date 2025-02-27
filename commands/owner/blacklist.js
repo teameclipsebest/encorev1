@@ -79,7 +79,7 @@ module.exports = class Blacklist extends BaseCommand {
     }
 }
 // EmbedBuilder is already imported above
-const BaseCommand = require("../../assets/baseCmd");
+// BaseCommand is already imported at the top of the file
 
 module.exports = class Blacklist extends BaseCommand {
     constructor(client) {
