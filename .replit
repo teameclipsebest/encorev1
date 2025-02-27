@@ -12,6 +12,6 @@ channel = "stable-24_05"
 language = "nodejs"
 
 [deployment]
-run = ["node", "index.js"]
+run = ["sh", "-c", "python -m http.server -d public 8080"]
 deploymentTarget = "cloudrun"
 ignorePorts = false
