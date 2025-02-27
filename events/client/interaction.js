@@ -1308,6 +1308,29 @@ module.exports = class BaseInteraction extends BaseEvent {
                     return await interaction.update({
                         embeds: [em1]
                     });
+                } else if (value === "team-help") {
+                    let embed = new EmbedBuilder()
+                        .setColor(this.client.config.color)
+                        .setTitle("Eclipse Team Members")
+                        .setDescription("The people behind Eclipse bot development and maintenance.")
+                        .addFields([
+                            {
+                                name: "Core Developers",
+                                value: "The main developers who created and maintain Eclipse."
+                            },
+                            {
+                                name: "Contributors",
+                                value: "Everyone who helped make Eclipse better."
+                            }
+                        ])
+                        .setFooter({
+                            text: `Requested By: ${interaction.user.globalName ?? interaction.user.username}`,
+                            iconURL: interaction.user.displayAvatarURL({ forceStatic: false })
+                        });
+                    
+                    return await interaction.update({
+                        embeds: [embed]
+                    });
                 }
             }
         }
