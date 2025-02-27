@@ -18,24 +18,35 @@ module.exports = class Ready extends BaseEvent {
 
                 // Add 'type' field to options if they exist
                 if (cmdCopy.options) {
-                    cmdCopy.options = cmdCopy.options.map(option => {
-                        if (!option.type) {
-                            // Default to STRING (3) if type is missing
-                            option.type = 3;
-                        }
+                    // Check if options is an array of objects
+                    if (Array.isArray(cmdCopy.options)) {
+                        cmdCopy.options = cmdCopy.options.map(option => {
+                            // Skip if option is not an object (might be a string)
+                            if (typeof option !== 'object' || option === null) {
+                                return option;
+                            }
+                            
+                            if (!option.type) {
+                                // Default to STRING (3) if type is missing
+                                option.type = 3;
+                            }
 
-                        // Check for nested options (subcommand groups)
-                        if (option.options) {
-                            option.options = option.options.map(subOption => {
-                                if (!subOption.type) {
-                                    subOption.type = 3;
-                                }
-                                return subOption;
-                            });
-                        }
+                            // Check for nested options (subcommand groups)
+                            if (option.options) {
+                                option.options = option.options.map(subOption => {
+                                    if (typeof subOption === 'object' && subOption !== null && !subOption.type) {
+                                        subOption.type = 3;
+                                    }
+                                    return subOption;
+                                });
+                            }
 
-                        return option;
-                    });
+                            return option;
+                        });
+                    } else {
+                        // If options is not an array, just leave it as is
+                        // Some commands might use options as a description array
+                    }
                 }
 
                 cmds.push(cmdCopy);
