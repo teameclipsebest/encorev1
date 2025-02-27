@@ -1,18 +1,20 @@
 {
-    "owner": "",
-    "developer": "",
-    "staff": "",
-    "moderator": "",
-    "friend": "",
-    "vip": "",
-    "special": "",
+    "owner": "1344720330442145922",
+    "developer": "1344720557739999334",
+    "staff": "1344720608339955793",
+    "moderator": "1344720657476223026",
+    "friend": "1344720741857366036",
+    "vip": "1344720786769838162",
+    "special": "1344720822173958224",
+    "user": ""
     "emotes": {
-        "owner": "",
-        "developer": "",
-        "staff": "",
-        "moderator": "",
-        "friend": "",
-        "vip": "",
-        "special": ""
+        "owner": "<:owner:1344721563848806504>",
+        "developer": "<a:developer:1344721662368682098>",
+        "staff": "<a:staff:1344721691145928836>",
+        "moderator": "<a:mod:1344721716500369498>",
+        "friend": "<:friends:1344721744203874337>",
+        "vip": "<:VIP:1344721772737724446>",
+        "special": "<a:flower:1344721802622140476>"
+        "user": ""
     }
 }
