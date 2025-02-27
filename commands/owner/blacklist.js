@@ -78,7 +78,7 @@ module.exports = class Blacklist extends BaseCommand {
         }
     }
 }
-const { EmbedBuilder } = require("discord.js");
+// EmbedBuilder is already imported above
 const BaseCommand = require("../../assets/baseCmd");
 
 module.exports = class Blacklist extends BaseCommand {
@@ -141,7 +141,7 @@ module.exports = class Blacklist extends BaseCommand {
         }
 
         const id = args[1];
-        
+
         if (option === "user") {
             if (blacklistedUsers.includes(id)) {
                 return message.channel.send({
@@ -152,10 +152,10 @@ module.exports = class Blacklist extends BaseCommand {
                     ]
                 });
             }
-            
+
             blacklistedUsers.push(id);
             await this.client.db.updateBlacklist({ blacklistedUsers });
-            
+
             return message.channel.send({
                 embeds: [
                     new EmbedBuilder()
@@ -173,10 +173,10 @@ module.exports = class Blacklist extends BaseCommand {
                     ]
                 });
             }
-            
+
             blacklistedServers.push(id);
             await this.client.db.updateBlacklist({ blacklistedServers });
-            
+
             return message.channel.send({
                 embeds: [
                     new EmbedBuilder()
@@ -188,7 +188,7 @@ module.exports = class Blacklist extends BaseCommand {
             if (blacklistedUsers.includes(id)) {
                 blacklistedUsers = blacklistedUsers.filter(userId => userId !== id);
                 await this.client.db.updateBlacklist({ blacklistedUsers });
-                
+
                 return message.channel.send({
                     embeds: [
                         new EmbedBuilder()
@@ -199,7 +199,7 @@ module.exports = class Blacklist extends BaseCommand {
             } else if (blacklistedServers.includes(id)) {
                 blacklistedServers = blacklistedServers.filter(serverId => serverId !== id);
                 await this.client.db.updateBlacklist({ blacklistedServers });
-                
+
                 return message.channel.send({
                     embeds: [
                         new EmbedBuilder()
