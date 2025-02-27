@@ -1,7 +1,7 @@
 const vars = {
     token: process.env.BOT_TOKEN || "", // Add your token as environment variable
     prefix: "!",
-    mongoURL: process.env.MONGODB_URI || "", // Add your MongoDB URI as environment variable
+    mongoURL: process.env.MONGODB_URI ? (process.env.MONGODB_URI.startsWith("mongodb://") || process.env.MONGODB_URI.startsWith("mongodb+srv://") ? process.env.MONGODB_URI : `mongodb://${process.env.MONGODB_URI}`) : "", // Add your MongoDB URI as environment variable
     owners: ["1344693434723864587"],
     color: "#ff0000" ,// embed color
     webhooks: {

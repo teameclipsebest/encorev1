@@ -133,12 +133,21 @@ module.exports = class Database {
         }));
     }
     async connect() {
-        await mongoose.connect(this.client.config.mongoURL, {
-            autoIndex: true,
-            family: 4
-        });
-
-        this.client.logger.ready(`Database Got Connected Successfully.`)
+        if (!this.client.config.mongoURL) {
+            this.client.logger.error(`MongoDB connection string is missing or empty. Please check your environment variables.`);
+            return;
+        }
+        
+        try {
+            await mongoose.connect(this.client.config.mongoURL, {
+                autoIndex: true,
+                family: 4
+            });
+            this.client.logger.ready(`Database Got Connected Successfully.`);
+        } catch (error) {
+            this.client.logger.error(`Failed to connect to MongoDB: ${error.message}`);
+            console.error("Database connection error:", error);
+        }
     }
     async getGuildData({ id }) {
         return await this.guilds.findOne({ id });
