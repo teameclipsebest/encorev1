@@ -18,34 +18,65 @@ module.exports = class Ready extends BaseEvent {
 
                 // Add 'type' field to options if they exist
                 if (cmdCopy.options) {
-                    // Check if options is an array of objects
+                    // Check if options is an array
                     if (Array.isArray(cmdCopy.options)) {
                         cmdCopy.options = cmdCopy.options.map(option => {
-                            // Skip if option is not an object (might be a string)
-                            if (typeof option !== 'object' || option === null) {
-                                return option;
-                            }
-                            
-                            if (!option.type) {
-                                // Default to STRING (3) if type is missing
-                                option.type = 3;
-                            }
+                            // Convert string options to proper option objects
+                            if (typeof option === 'string') {
+                                // Parse the string option format like "type <PLAYING/WATCHING/LISTENING/STREAMING>"
+                                const match = option.match(/([a-zA-Z]+)(?: <(.+)>)?/);
+                                if (match) {
+                                    const name = match[1].toLowerCase();
+                                    const description = match[2] ? `${name} ${match[2]}` : name;
+                                    return {
+                                        name: name,
+                                        description: description,
+                                        type: 3 // STRING type
+                                    };
+                                } else {
+                                    return {
+                                        name: option.toLowerCase().replace(/\s+/g, '-'),
+                                        description: option,
+                                        type: 3 // STRING type
+                                    };
+                                }
+                            } else if (typeof option === 'object' && option !== null) {
+                                // Make sure existing object has all required fields
+                                if (!option.type) {
+                                    option.type = 3; // Default to STRING
+                                }
+                                
+                                if (!option.name) {
+                                    option.name = "option";
+                                }
+                                
+                                if (!option.description) {
+                                    option.description = "Command option";
+                                }
 
-                            // Check for nested options (subcommand groups)
-                            if (option.options) {
-                                option.options = option.options.map(subOption => {
-                                    if (typeof subOption === 'object' && subOption !== null && !subOption.type) {
-                                        subOption.type = 3;
-                                    }
-                                    return subOption;
-                                });
+                                // Check for nested options (subcommand groups)
+                                if (option.options) {
+                                    option.options = option.options.map(subOption => {
+                                        if (typeof subOption === 'string') {
+                                            return {
+                                                name: subOption.toLowerCase().replace(/\s+/g, '-'),
+                                                description: subOption,
+                                                type: 3 // STRING type
+                                            };
+                                        } else if (typeof subOption === 'object' && subOption !== null) {
+                                            if (!subOption.type) subOption.type = 3;
+                                            if (!subOption.name) subOption.name = "suboption";
+                                            if (!subOption.description) subOption.description = "Command suboption";
+                                        }
+                                        return subOption;
+                                    });
+                                }
                             }
-
                             return option;
                         });
                     } else {
-                        // If options is not an array, just leave it as is
-                        // Some commands might use options as a description array
+                        // If options is not an array, convert it to an empty array
+                        cmdCopy.options = [];
                     }
                 }
 
