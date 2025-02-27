@@ -290,7 +290,7 @@ module.exports = class Database {
         return await this.noPrefix.findOne({ id: this.client.user.id });
     }
     async createSetup({
-        id, message, channel
+        id, guildId, message, channel
     }) {
         if (!id) {
             throw new Error("Guild ID is required for setup creation");
@@ -300,6 +300,7 @@ module.exports = class Database {
             { id },
             {
                 $set: {
+                    guildId: id, // Set guildId to be the same as id
                     "setupSettings.messageId": message.id,
                     "setupSettings.channelId": channel.id
                 }

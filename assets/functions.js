@@ -25,6 +25,11 @@ module.exports = {
         }
     },
     createSetup: async function (client, guild, channel) {
+        // Validate guild and guild ID first
+        if (!guild || !guild.id) {
+            throw new Error("Guild ID is required for setup creation");
+        }
+
         let content = `__**Queue List**__\n\nJoin a Voice Channel and type in your Search Query or a Url`;
 
         let embed = new EmbedBuilder().setColor(client.config.color).setTitle(`Nothing Playing right now`).setURL(client.config.serverLink).setImage(client.config.setupImg).setAuthor({
@@ -53,12 +58,10 @@ module.exports = {
 
         let msg = await channel.send({ content, embeds: [embed], components: [row1, row2] });
 
-        if (!guild || !guild.id) {
-            throw new Error("Guild ID is required for setup creation");
-        }
-
+        // Create the setup with all required parameters
         await client.db.createSetup({
             id: guild.id,
+            guildId: guild.id, // Add the guildId field explicitly
             message: msg,
             channel: channel
         });
