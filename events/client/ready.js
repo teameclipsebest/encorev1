@@ -12,8 +12,9 @@ module.exports = class Ready extends BaseEvent {
         let cmds = [];
         this.client.commands.forEach((cmd) => {
             if(cmd.name && cmd.description) {
-                // Create a deep copy of the command to avoid modifying the original
-                const cmdCopy = JSON.parse(JSON.stringify(cmd));
+                // Create a shallow copy of the command to avoid circular references
+                const cmdCopy = { ...cmd };
+                delete cmdCopy.client; // Remove circular reference to client
 
                 // Add 'type' field to options if they exist
                 if (cmdCopy.options) {
