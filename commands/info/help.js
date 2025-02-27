@@ -36,42 +36,42 @@ module.exports = class HelpCommand extends BaseCommand {
                 new StringSelectMenuBuilder().setCustomId("help-menu").setPlaceholder("Select Categories").setDisabled(false).addOptions([
                     {
                         label: "Home",
-                        emoji: `${this.client.emoji.home}`,
+                        emoji: this.client.emoji?.home || "🏠",
                         value: "home-help"
                     },
                     {
                         label: "Music",
-                        emoji: `${this.client.emoji.music}`,
+                        emoji: this.client.emoji?.music || "🎵",
                         value: "music-help",
                     },
                     {
                         label: "Filters",
-                        emoji: `${this.client.emoji.filters}`,
+                        emoji: this.client.emoji?.filters || "🎛️",
                         value: "filters-help"
                     },
                     {
                         label: "Settings",
-                        emoji:  `${this.client.emoji.settings}`,
+                        emoji:  this.client.emoji?.settings || "⚙️",
                         value: "settings-help"
                     },
                     {
                         label: "Information",
-                        emoji: `${this.client.emoji["info"]}`,
+                        emoji: this.client.emoji?.info || "ℹ️",
                         value: "info-help"
                     },
                     {
                         label: "Owner",
-                        emoji: `${this.client.emoji.owner}`,
+                        emoji: this.client.emoji?.owner || "👑",
                         value: "owner-help"
                     },
                     {
                         label: "Playlist",
-                        emoji: `${this.client.emoji.playlist}`,
+                        emoji: this.client.emoji?.playlist || "🎶",
                         value: "playlist-help"
                     },
                     {
                         label: "All Commands",
-                        emoji: `${this.client.emoji.allCommands}`,
+                        emoji: this.client.emoji?.allCommands || "📜",
                         value: "allCmds-help"
                     }
                 ])
